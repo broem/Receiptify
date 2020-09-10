@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"regexp"
 
-	"github.com/gorilla/mux"
 	"github.com/otiai10/gosseract/v2"
 )
 
@@ -27,7 +27,7 @@ func VisionHandler(w http.ResponseWriter, req *http.Request) {
 	defer func() {
 		tempF.Close()
 		os.Remove(tempF.Name())
-	}
+	}()
 
 	visions.Base64 = regexp.MustCompile("data:image\\/png;base64,").ReplaceAllString(visions.Base64, "")
 	b, err := base64.StdEncoding.DecodeString(visions.Base64)
@@ -46,6 +46,8 @@ func VisionHandler(w http.ResponseWriter, req *http.Request) {
 
 	}
 
-	return strings.Trim(translated)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(translated))
 
 }
