@@ -10,10 +10,10 @@ import (
 const port = ":8086"
 
 func Router() {
-	router := mux.NewRouter()
-	router.HandleFunc("api/v1/base64string", controllers.VisionHandler).Methods("POST")
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/api/v1/base64string", controllers.VisionHandler).Methods("POST")
 
-	// need to account for all the statics
+	// need to account for all the static
 	fs := http.FileServer(http.Dir("./client/receiptify/dist"))
 	router.PathPrefix("/js").Handler(http.StripPrefix("/", fs))
 	router.PathPrefix("/css").Handler(http.StripPrefix("/", fs))

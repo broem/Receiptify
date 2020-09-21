@@ -7,10 +7,12 @@
     <div class="image-preview" v-if="imageData.length > 0">
       <img class="preview" :src="imageData">
     </div>
+    <v-btn large outlined :disabled="imageData.length == 0" color="primary" v-on:click="convertImg">Convert</v-btn>
   </v-container>
 </template>
 
 <script>
+import API from '../api.js'
 export default {
   name: 'Home',
   data: () => ({
@@ -27,6 +29,15 @@ export default {
     }
     reader.readAsDataURL(input.files[0]);
     }
+  },
+  convertImg: function() {
+    API.base64string(this.imageData)
+    .then(function(resp) {
+      console.log(resp);
+    })
+    .catch(function (err) {
+      console.log(err);
+    })
   }
   }
 }

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 import axios from 'axios';
 
 const BASE = 'http://localhost:8086';
@@ -10,7 +10,7 @@ const client = axios.create({
 
 const API = {
     base64string(b64) {
-        return this.do('post', '/base64string', b64);
+        return this.do('post', '/api/v1/base64string', b64);
     },
 
     async do(method, from, data) {
