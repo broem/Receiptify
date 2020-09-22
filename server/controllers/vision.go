@@ -11,7 +11,7 @@ import (
 	"github.com/otiai10/gosseract/v2"
 )
 
-// Vision returns the tesseracted information
+// VisionHandler ... Vision returns the tesseracted information
 func VisionHandler(w http.ResponseWriter, req *http.Request) {
 	visions := new(VisionRequest)
 
@@ -46,8 +46,6 @@ func VisionHandler(w http.ResponseWriter, req *http.Request) {
 
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(translated))
-
+	json.NewEncoder(w).Encode(translated)
 }
