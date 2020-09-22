@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"regexp"
@@ -20,19 +21,38 @@ func VisionHandler(w http.ResponseWriter, req *http.Request) {
 
 	}
 
+	translated, err := getRawText(visions)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(translated)
+}
+
+// VisionCSV ... returns the tesseracted information parsed into a neat csv
+func VisionCSV(w http.ResponseWriter, req *http.Request) {
+
+}
+
+func getRawText(v VisionRequest) string, error {
+
 	tempF, err := ioutil.TempFile("", "")
 	if err != nil {
-
+		log.Printf("Unable to create temp file")
+		return "", err
 	}
 	defer func() {
 		tempF.Close()
 		os.Remove(tempF.Name())
 	}()
 
-	visions.Base64 = regexp.MustCompile("data:image\\/png;base64,").ReplaceAllString(visions.Base64, "")
-	b, err := base64.StdEncoding.DecodeString(visions.Base64)
+	v.Base64 = regexp.MustCompile("data:image\\/png;base64,").ReplaceAllString(v.Base64, "")
+	b, err := base64.StdEncoding.DecodeString(v.Base64)
 	if err != nil {
-
+		log.Printf("Unable to decode base64")
+		return "Unable to decode", err
 	}
 	tempF.Write(b)
 
@@ -43,9 +63,9 @@ func VisionHandler(w http.ResponseWriter, req *http.Request) {
 
 	translated, err := client.Text()
 	if err != nil {
-
+		log.Printf("Unable to get text from image!")
+		return "Unable to get text from image!", err
 	}
 
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(translated)
+	return translated, err
 }

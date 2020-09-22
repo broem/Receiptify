@@ -14,6 +14,8 @@ const port = ":8086"
 func Router() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/api/v1/convertRaw", controllers.VisionHandler).Methods("POST")
+	router.HandleFunc("/api/v1/generateCSV", controllers.GenerateCSV).Methods("POST")
+	router.HandleFunc("/api/v1/convertGenerate"), controllers.VisionCSV).Methods("POST")
 
 	// need to account for all the static
 	fs := http.FileServer(http.Dir("./client/receiptify/dist"))
