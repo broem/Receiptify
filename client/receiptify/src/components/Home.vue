@@ -31,7 +31,7 @@ export default {
     }
   },
   convertImg: function() {
-    API.base64string(this.imageData)
+    API.convertRaw(this.imageData)
     .then(function(resp) {
       console.log(resp);
     })

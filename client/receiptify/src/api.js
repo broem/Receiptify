@@ -9,8 +9,8 @@ const client = axios.create({
 
 
 const API = {
-    base64string(b64) {
-        return this.do('post', '/api/v1/base64string', b64);
+    convertRaw(b64) {
+        return this.do('post', '/api/v1/convertRaw', b64);
     },
 
     async do(method, from, data) {
