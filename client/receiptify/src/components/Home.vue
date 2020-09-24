@@ -8,6 +8,12 @@
       <img class="preview" :src="imageData">
     </div>
     <v-btn large outlined :disabled="imageData.length == 0" color="primary" v-on:click="convertImg">Convert</v-btn>
+    <div>
+      <p>Text</p>
+      <div v-if="translatedText.length > 0">
+        <pre style="width:100%;overflow:scroll;">{{ translatedText }}</pre>
+      </div>
+    </div>
   </v-container>
 </template>
 
@@ -16,7 +22,8 @@ import API from '../api.js'
 export default {
   name: 'Home',
   data: () => ({
-    imageData: ''
+    imageData: '',
+    translatedText: ''
   }),
   methods: {
   previewImage: function(event) {
@@ -32,8 +39,8 @@ export default {
   },
   convertImg: function() {
     API.convertRaw(this.imageData)
-    .then(function(resp) {
-      console.log(resp);
+    .then((resp) => {
+      this.translatedText = resp.data
     })
     .catch(function (err) {
       console.log(err);

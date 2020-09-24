@@ -36,7 +36,7 @@ func VisionCSV(w http.ResponseWriter, req *http.Request) {
 
 }
 
-func getRawText(v VisionRequest) string, error {
+func getRawText(v *VisionRequest) (string, error) {
 
 	tempF, err := ioutil.TempFile("", "")
 	if err != nil {
