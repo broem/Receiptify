@@ -12,6 +12,9 @@ const API = {
     convertRaw(b64) {
         return this.do('post', '/api/v1/convertRaw', b64);
     },
+    convertCsv(text) {
+        return this.do('post', '/api/v1/generateCSV', text);
+    },
 
     async do(method, from, data) {
         return client({

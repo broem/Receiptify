@@ -11,9 +11,10 @@
     <div>
       <p>Text</p>
       <div v-if="translatedText.length > 0">
-        <pre style="width:100%;overflow:scroll;">{{ translatedText }}</pre>
+        <pre style="width:100%;overflow:scroll;background-color:aliceblue;">{{ translatedText }}</pre>
       </div>
     </div>
+    <v-btn class="file-gen-csv" small outlined :disabled="translatedText.length == 0" color="primary" v-on:click="genCsv">Generate Csv</v-btn>
   </v-container>
 </template>
 
@@ -41,6 +42,16 @@ export default {
     API.convertRaw(this.imageData)
     .then((resp) => {
       this.translatedText = resp.data
+    })
+    .catch(function (err) {
+      console.log(err);
+    })
+  },
+  genCsv: function() {
+    API.convertCsv({rawText: this.translatedText})
+    .then((resp) => {
+      console.log(resp)
+      // this.translatedText = resp.data
     })
     .catch(function (err) {
       console.log(err);
