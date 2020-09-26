@@ -39,7 +39,7 @@ export default {
     }
   },
   convertImg: function() {
-    API.convertRaw(this.imageData)
+    API.convertRaw({base64: this.imageData})
     .then((resp) => {
       this.translatedText = resp.data
     })

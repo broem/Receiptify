@@ -48,7 +48,7 @@ func getRawText(v *VisionRequest) (string, error) {
 		os.Remove(tempF.Name())
 	}()
 
-	v.Base64 = regexp.MustCompile("data:image\\/png;base64,").ReplaceAllString(v.Base64, "")
+	v.Base64 = regexp.MustCompile("data:image\\/(png|jpg|jpeg);base64,").ReplaceAllString(v.Base64, "")
 	b, err := base64.StdEncoding.DecodeString(v.Base64)
 	if err != nil {
 		log.Printf("Unable to decode base64")
