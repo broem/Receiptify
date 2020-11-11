@@ -26,7 +26,7 @@ func Router() {
 
 	router.NotFoundHandler = http.HandlerFunc(controllers.IndexRoute)
 
-	router.Use(Middleware)
+	router.Use(Logger)
 
 	log.Printf("Now listening on port %s\n", port)
 	log.Fatal(http.ListenAndServe(port, router))
@@ -51,7 +51,7 @@ func Logger(h http.Handler) http.Handler {
 }
 
 func Middleware(h http.Handler) http.Handler {
-	h = UseJson(h)
-	h = UseCors(h)
+	// h = UseJson(h)
+	// h = UseCors(h)
 	return Logger(h)
 }
