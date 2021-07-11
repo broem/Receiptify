@@ -6,8 +6,13 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <div class="img" v-for="img in imageSources" v-bind:key="img">
-      <img :src="img" @click="clickImage(img)" />
+    <div class="img" v-for="(img, index) in imageSources" v-bind:key="index">
+      <img
+        :src="img"
+        @click="clickImage(img)"
+        v-on:click="toggle(index)"
+        :class="{ active: index == activeIndex }"
+      />
     </div>
 
     <h1 v-if="imageSources.length == 0 && !isDragging">Drop some images</h1>
@@ -37,6 +42,7 @@ export default {
       imageData: "",
       isDragging: false,
       imageSources: [],
+      activeIndex: 0,
     };
   },
   computed: {
@@ -54,12 +60,15 @@ export default {
       fetch(img)
         .then((res) => res.blob())
         .then((blob) => {
-          const file = new File([blob], "dot.png", blob); 
+          const file = new File([blob], "dot.png", blob);
           let files = [];
           files.push(file);
           console.log(files);
           this.emitMethod(files);
         });
+    },
+    toggle: function(index) {
+      this.activeIndex = index;
     },
     dragOver() {
       this.isDragging = true;
@@ -79,6 +88,8 @@ export default {
       let sources = await Promise.all(promises);
       this.imageSources = this.imageSources.concat(sources);
       this.isDragging = false;
+
+      this.activeIndex = this.imageSources.length - 1;
     },
     requestUploadFile() {
       var src = this.$el.querySelector("#uploadmyfile");
@@ -98,6 +109,9 @@ export default {
 </script>
 
 <style scoped>
+.active {
+  border: 2px solid green;
+}
 .drop {
   width: 100%;
   height: 100%;
