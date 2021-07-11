@@ -7,7 +7,7 @@
     @drop.prevent="drop($event)"
   >
     <div class="img" v-for="img in imageSources" v-bind:key="img">
-      <img :src="img" />
+      <img :src="img" @click="clickImage(img)" />
     </div>
 
     <h1 v-if="imageSources.length == 0 && !isDragging">Drop some images</h1>
@@ -50,6 +50,17 @@ export default {
         EventBus.$emit("transferImage", files);
       }
     },
+    clickImage(img) {
+      fetch(img)
+        .then((res) => res.blob())
+        .then((blob) => {
+          const file = new File([blob], "dot.png", blob); 
+          let files = [];
+          files.push(file);
+          console.log(files);
+          this.emitMethod(files);
+        });
+    },
     dragOver() {
       this.isDragging = true;
     },
@@ -60,7 +71,7 @@ export default {
       let files = [...e.dataTransfer.files];
       this.emitMethod(files);
       let images = files.filter((file) => file.type.indexOf("image/") >= 0);
-      
+
       let promises = [];
       images.forEach((file) => {
         promises.push(this.getBase64(file));

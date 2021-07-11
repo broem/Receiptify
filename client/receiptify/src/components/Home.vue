@@ -3,7 +3,7 @@
     <div class="drop-images"><dropImages></dropImages></div>
 
     <div class="image-preview" v-if="imageData.length > 0">
-      <img class="preview" :src="imageData" />w
+      <img class="preview" :src="imageData" />
     </div>
     <v-btn
       large
