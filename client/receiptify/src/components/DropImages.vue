@@ -202,18 +202,18 @@ export default {
   border: 2px solid green;
 }
 .drop {
-  overflow-x: scroll;
+  overflow: auto;
+  position: relative;
   width: 100%;
   height: 875px;
   background-color: #eee;
   border: 10px solid #eee;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
   padding: 1rem;
   transition: background-color 0.2s ease-in-out;
   font-family: sans-serif;
-  position: relative;
 }
 .isDragging {
   background-color: #999;
