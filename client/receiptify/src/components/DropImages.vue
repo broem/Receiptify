@@ -1,8 +1,13 @@
 <template>
-  <div class="main">
-    <h1 v-if="imageSources.length == 0 && !isDragging">
-      Drop some images
-    </h1>
+  <div class="main-container">
+    <div
+      v-if="imageSources.length == 0 && !isDragging"
+      class="drop-some-images"
+    >
+      <h1>
+        Drop some images
+      </h1>
+    </div>
     <div
       class="drop"
       :class="getClasses"
@@ -11,18 +16,18 @@
       @drop.prevent="drop($event)"
     >
       <div class="img" v-for="(img, i) in imageSources" v-bind:key="i">
-        <div class="container">
+        <div
+          class="image-button-container"
+          @mouseenter="activateButton(i)"
+          @mouseleave="deactivateButton(i)"
+        >
           <img
             :src="img"
-            @click="clickImage(img)"
-            v-on:click="toggle(i)"
+            @click="clickImage(img, i)"
             :class="{ active: i == activeIndex }"
-            @mouseenter="activateButton(i)"
-            @mouseleave="deactivateButton(i)"
           />
           <v-btn
-            class="deleteButton"
-            @mouseenter="activateButton(i)"
+            class="delete-button"
             small
             outlined
             v-if="activateDeleteButton && i == activeIndex"
@@ -34,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="manual">
+    <div class="manual-image-drop">
       <label for="uploadmyfile">
         <p>or pick from device</p>
       </label>
@@ -61,6 +66,7 @@ export default {
       imageSources: [],
       activeIndex: 0,
       activateDeleteButton: false,
+      onlyOnDrop: false,
     };
   },
   computed: {
@@ -87,7 +93,7 @@ export default {
     removeImage(i) {
       this.imageSources.splice(i, 1);
     },
-    clickImage(img) {
+    clickImage(img, i) {
       this.activateDeleteButton = true;
       fetch(img)
         .then((res) => res.blob())
@@ -95,11 +101,9 @@ export default {
           const file = new File([blob], "dot.png", blob);
           let files = [];
           files.push(file);
-          console.log(files);
           this.emitMethod(files);
         });
-    },
-    toggle(i) {
+
       this.activeIndex = i;
     },
     dragOver() {
@@ -109,11 +113,13 @@ export default {
       this.isDragging = false;
     },
     async drop(e) {
-      this.activateDeleteButton = true;
       let files = [...e.dataTransfer.files];
-      this.emitMethod(files);
+      let filesforTransfer = [];
+      files.forEach((file) => {
+        filesforTransfer.push(file);
+      });
+      this.emitMethod(filesforTransfer.splice(filesforTransfer.length - 1));
       let images = files.filter((file) => file.type.indexOf("image/") >= 0);
-
       let promises = [];
       images.forEach((file) => {
         promises.push(this.getBase64(file));
@@ -121,7 +127,6 @@ export default {
       let sources = await Promise.all(promises);
       this.imageSources = this.imageSources.concat(sources);
       this.isDragging = false;
-
       this.activeIndex = this.imageSources.length - 1;
     },
     requestUploadFile() {
@@ -142,16 +147,18 @@ export default {
 </script>
 
 <style scoped>
-.main {
+.main-container {
+  position: relative;
+  width: 100%;
+  align-items: center;
+  height: auto;
+}
+.image-button-container {
   position: relative;
   width: 100%;
   height: auto;
 }
-.container {
-  position: relative;
-  width: 100%;
-}
-.deleteButton {
+.delete-button {
   position: absolute;
   top: 6%;
   left: 90%;
@@ -160,6 +167,52 @@ export default {
   padding: 12px 24px;
   cursor: pointer;
   z-index: 2;
+}
+.active {
+  border: 2px solid green;
+}
+.drop {
+  overflow: auto;
+  position: relative;
+  width: 100%;
+  height: 875px;
+  background-color: #eee;
+  border: 10px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 1rem;
+  transition: background-color 0.2s ease-in-out;
+  font-family: sans-serif;
+}
+.isDragging {
+  background-color: #999;
+  border-color: #fff;
+}
+.drop-some-images {
+  position: absolute;
+  left: 50;
+  padding-top: 400px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 2 rem;
+  text-decoration: underline;
+  z-index: 3;
+}
+.manual-image-drop {
+  position: absolute;
+  width: 100%;
+  padding-top: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1 rem;
+  text-decoration: underline;
+}
+#uploadmyfile {
+  display: none;
 }
 @media (max-width: 600px) {
   .img {
@@ -205,41 +258,5 @@ export default {
     z-index: 1;
     object-fit: contain;
   }
-}
-.active {
-  border: 2px solid green;
-}
-.drop {
-  overflow: auto;
-  position: relative;
-  width: 100%;
-  height: 875px;
-  background-color: #eee;
-  border: 10px solid #eee;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  padding: 1rem; 
-  transition: background-color 0.2s ease-in-out;
-  font-family: sans-serif;
-}
-.isDragging {
-  background-color: #999;
-  border-color: #fff;
-}
-
-.manual {
-  position: absolute; 
-  width: 100%;
-  padding-top: 20px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1 rem;
-  text-decoration: underline;
-}
-
-#uploadmyfile {
-  display: none;
 }
 </style>

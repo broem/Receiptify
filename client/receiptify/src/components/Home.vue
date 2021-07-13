@@ -45,17 +45,16 @@ export default {
   data: () => ({
     imageData: "",
     translatedText: "",
-    images:[]
-   
+    images: [],
   }),
   mounted() {
     EventBus.$on("transferImage", (images) => {
       this.images = images;
       var reader = new FileReader();
-        reader.onload = (e) => {
-          this.imageData = e.target.result;
-        };
-        reader.readAsDataURL(this.images[0]);
+      reader.onload = (e) => {
+        this.imageData = e.target.result;
+      };
+      reader.readAsDataURL(this.images[0]);
     });
   },
   methods: {
