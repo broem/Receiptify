@@ -1,36 +1,39 @@
 <template>
-  <div
-    class="drop"
-    :class="getClasses"
-    @dragover.prevent="dragOver"
-    @dragleave.prevent="dragLeave"
-    @drop.prevent="drop($event)"
-  >
-    <div class="img" v-for="(img, i) in imageSources" v-bind:key="i">
-      <div class="container">
-        <img
-          :src="img"
-          @click="clickImage(img)"
-          v-on:click="toggle(i)"
-          :class="{ active: i == activeIndex }"
-          @mouseenter="activateButton(i)"
-          @mouseleave="deactivateButton(i)"
-        />
-        <v-btn
-          class="deleteButton"
-          @mouseenter="activateButton(i)"
-          small
-          outlined
-          v-if="activateDeleteButton && i == activeIndex"
-          color="warning"
-          v-on:click="removeImage(i)"
-        >
-          Delete</v-btn
-        >
+  <div class="main">
+    <h1 v-if="imageSources.length == 0 && !isDragging">
+      Drop some images
+    </h1>
+    <div
+      class="drop"
+      :class="getClasses"
+      @dragover.prevent="dragOver"
+      @dragleave.prevent="dragLeave"
+      @drop.prevent="drop($event)"
+    >
+      <div class="img" v-for="(img, i) in imageSources" v-bind:key="i">
+        <div class="container">
+          <img
+            :src="img"
+            @click="clickImage(img)"
+            v-on:click="toggle(i)"
+            :class="{ active: i == activeIndex }"
+            @mouseenter="activateButton(i)"
+            @mouseleave="deactivateButton(i)"
+          />
+          <v-btn
+            class="deleteButton"
+            @mouseenter="activateButton(i)"
+            small
+            outlined
+            v-if="activateDeleteButton && i == activeIndex"
+            color="warning"
+            v-on:click="removeImage(i)"
+          >
+            Delete</v-btn
+          >
+        </div>
       </div>
     </div>
-    <h1 v-if="imageSources.length == 0 && !isDragging">Drop some images</h1>
-
     <div class="manual">
       <label for="uploadmyfile">
         <p>or pick from device</p>
@@ -96,7 +99,7 @@ export default {
           this.emitMethod(files);
         });
     },
-    toggle: function(i) {
+    toggle(i) {
       this.activeIndex = i;
     },
     dragOver() {
@@ -139,6 +142,11 @@ export default {
 </script>
 
 <style scoped>
+.main {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
 .container {
   position: relative;
   width: 100%;
@@ -160,7 +168,7 @@ export default {
     align-items: center;
     justify-content: center;
     max-width: 300px;
-    height: 300px;
+    height: 200px;
     z-index: 1;
     object-fit: contain;
   }
@@ -171,7 +179,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 400px;
+    height: 300px;
     z-index: 1;
     object-fit: contain;
   }
@@ -182,7 +190,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 500px;
+    height: 400px;
     z-index: 1;
     object-fit: contain;
   }
@@ -193,7 +201,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 600px;
+    height: 500px;
     z-index: 1;
     object-fit: contain;
   }
@@ -211,7 +219,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: right;
-  padding: 1rem;
+  padding: 1rem; 
   transition: background-color 0.2s ease-in-out;
   font-family: sans-serif;
 }
@@ -221,13 +229,16 @@ export default {
 }
 
 .manual {
-  position: absolute;
-  bottom: 0;
+  position: absolute; 
   width: 100%;
+  padding-top: 20px;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 1 rem;
   text-decoration: underline;
 }
+
 #uploadmyfile {
   display: none;
 }
