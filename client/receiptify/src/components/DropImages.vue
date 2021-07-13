@@ -6,15 +6,29 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <div class="img" v-for="(img, index) in imageSources" v-bind:key="index">
-      <img
-        :src="img"
-        @click="clickImage(img)"
-        v-on:click="toggle(index)"
-        :class="{ active: index == activeIndex }"
-      />
+    <div class="img" v-for="(img, i) in imageSources" v-bind:key="i">
+      <div class="container">
+        <img
+          :src="img"
+          @click="clickImage(img)"
+          v-on:click="toggle(i)"
+          :class="{ active: i == activeIndex }"
+          @mouseenter="activateButton(i)"
+          @mouseleave="deactivateButton(i)"
+        />
+        <v-btn
+          class="deleteButton"
+          @mouseenter="activateButton(i)"
+          small
+          outlined
+          v-if="activateDeleteButton && i == activeIndex"
+          color="warning"
+          v-on:click="removeImage(i)"
+        >
+          Delete</v-btn
+        >
+      </div>
     </div>
-
     <h1 v-if="imageSources.length == 0 && !isDragging">Drop some images</h1>
 
     <div class="manual">
@@ -43,6 +57,7 @@ export default {
       isDragging: false,
       imageSources: [],
       activeIndex: 0,
+      activateDeleteButton: false,
     };
   },
   computed: {
@@ -56,7 +71,21 @@ export default {
         EventBus.$emit("transferImage", files);
       }
     },
+    activateButton(i) {
+      if (i == this.activeIndex) {
+        this.activateDeleteButton = true;
+      }
+    },
+    deactivateButton(i) {
+      if (i == this.activeIndex) {
+        this.activateDeleteButton = false;
+      }
+    },
+    removeImage(i) {
+      this.imageSources.splice(i, 1);
+    },
     clickImage(img) {
+      this.activateDeleteButton = true;
       fetch(img)
         .then((res) => res.blob())
         .then((blob) => {
@@ -67,8 +96,8 @@ export default {
           this.emitMethod(files);
         });
     },
-    toggle: function(index) {
-      this.activeIndex = index;
+    toggle: function(i) {
+      this.activeIndex = i;
     },
     dragOver() {
       this.isDragging = true;
@@ -77,6 +106,7 @@ export default {
       this.isDragging = false;
     },
     async drop(e) {
+      this.activateDeleteButton = true;
       let files = [...e.dataTransfer.files];
       this.emitMethod(files);
       let images = files.filter((file) => file.type.indexOf("image/") >= 0);
@@ -109,12 +139,72 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  position: relative;
+  width: 100%;
+}
+.deleteButton {
+  position: absolute;
+  top: 6%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  padding: 12px 24px;
+  cursor: pointer;
+  z-index: 2;
+}
+@media (max-width: 600px) {
+  .img {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    height: 300px;
+    z-index: 1;
+    object-fit: contain;
+  }
+}
+@media (min-width: 601px) {
+  .img {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    z-index: 1;
+    object-fit: contain;
+  }
+}
+@media (min-width: 1000px) {
+  .img {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    z-index: 1;
+    object-fit: contain;
+  }
+}
+@media (min-width: 1300px) {
+  .img {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    z-index: 1;
+    object-fit: contain;
+  }
+}
 .active {
   border: 2px solid green;
 }
 .drop {
+  overflow-x: scroll;
   width: 100%;
-  height: 100%;
+  height: 875px;
   background-color: #eee;
   border: 10px solid #eee;
   display: flex;
@@ -123,26 +213,13 @@ export default {
   padding: 1rem;
   transition: background-color 0.2s ease-in-out;
   font-family: sans-serif;
-  overflow: hidden;
   position: relative;
 }
 .isDragging {
   background-color: #999;
   border-color: #fff;
 }
-.img {
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+
 .manual {
   position: absolute;
   bottom: 0;
