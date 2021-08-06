@@ -12,23 +12,23 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-main>
-      <Home/>
+    <v-main>  
+      <Landing/>
       <Footer/>
     </v-main>
   </v-app>
 </template>
 
-<script>
-import Home from './components/Home';
+<script> 
 import Footer from './components/Footer'; 
+import Landing from './components/Landing';
 
 export default {
   name: 'App',
 
-  components: {
-    Home,
+  components: { 
     Footer, 
+    Landing
   },
 
   data: () => ({
