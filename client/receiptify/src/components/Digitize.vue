@@ -38,7 +38,7 @@ import API from "../api.js";
 import DropImages from "./DropImages.vue";
 import EventBus from "../services/event-bus";
 export default {
-  name: "scanning",
+  name: "digitize",
   components: {
     DropImages,
   },

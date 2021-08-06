@@ -4,7 +4,7 @@ import vuetify from './plugins/vuetify'
 // import axios from 'axios'; 
 import VueRouter from 'vue-router'
 import Landing from './components/Landing';
-import Scanning from './components/Scanning';
+import Digitize from './components/Digitize';
 
 Vue.use(VueRouter)
 
@@ -19,7 +19,7 @@ Vue.config.productionTip = false
 // We'll talk about nested routes later.
 const routes = [
   { path: '/', component: Landing },
-  { path: '/scanning', component: Scanning }
+  { path: '/digitize', component: Digitize }
 
 ]
 
