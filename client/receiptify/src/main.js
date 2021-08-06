@@ -18,7 +18,7 @@ Vue.config.productionTip = false
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/landing', component: Landing },
+  { path: '/', component: Landing },
   { path: '/scanning', component: Scanning }
 
 ]
