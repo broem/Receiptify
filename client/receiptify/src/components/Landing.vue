@@ -1,15 +1,31 @@
 <template>
   <div id="landing">
-    <v-tabs>
-      <v-tab>Premium</v-tab>
-      <v-tab>Explore</v-tab>
-      <v-tab>Product</v-tab>
-      <v-tab>Developer</v-tab>
-      <v-tab>Sign In</v-tab>
-    </v-tabs>
+    <div class="logo"><img src="@/assets/RLogo.png" /></div>
+    <div class="nav">
+      <v-row no-gutters>
+      <v-col style="width:100%" v-for="(k,i) in navBar.title" :key="i" cols="12" sm="2">
+        <v-card class="pa-2" @click="pushPath(i)" outlined tile>
+          {{k}} 
+        </v-card>
+      </v-col>
+      <v-row>
+    </div>
 
+    <div class="create_account">
+      <v-chip
+        style="width:100%; height:100%; text-align:center;"
+        color="blue"
+        link
+        outlined
+        >Create Account  ></v-chip
+      >
+    </div>
     <div class="digitize">
-      <aside><router-link to="/digitize">Digitize</router-link></aside>
+      <aside>
+        <router-link to="/digitize"
+          ><img src="@/assets/RButton.png"
+        /></router-link>
+      </aside>
     </div>
     <div class="content">
       <event-hub></event-hub>
@@ -21,8 +37,17 @@
 <script>
 export default {
   name: "landing",
-
-  methods: {},
+  data: () => ({
+    navBar:{
+      title: ["Premium", "Explore", "Product", "Developer", "Sign In"],
+      route: ["/premium", "/explore", "/product", "/developer", "/signIn"]
+    } 
+  }),
+  methods: {
+   pushPath(i) {
+     this.$router.push(this.navBar.route[i]);
+   }
+  },
 };
 </script>
 
@@ -33,19 +58,38 @@ export default {
   padding: 20px;
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+}
+
+.nav {
+  border: 2px solid red;
+  position: absolute;
+  width: 100vh;
+  height: 100px;
+  left: 50%;
+  top: 5%;
+}
+
+.logo {
+  width: 100%;
+  position: absolute;
+  left: 0%;
+  top: 5%;
+}
+
+.create_account {
+  position: absolute;
+  left: 80%;
+  top: 50%;
+  bottom: 50%;
+  width: 160px;
+  height: 50px;
 }
 
 .digitize {
-  border: 1px solid red;
   position: absolute;
-  text-align: center;
-  align-items: center;
-  right: 50%;
+  object-fit: contain;
+  width: 100%;
   left: 50%;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  bottom: 25px;
+  bottom: 5%;
 }
 </style>

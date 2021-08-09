@@ -5,6 +5,11 @@ import vuetify from './plugins/vuetify'
 import VueRouter from 'vue-router'
 import Landing from './components/Landing';
 import Digitize from './components/Digitize';
+import Developer from './components/Developer';
+import Explore from './components/Explore';
+import Premium from './components/Premium';
+import Product from './components/Product';
+import SignIn from './components/SignIn';
 
 Vue.use(VueRouter)
 
@@ -19,7 +24,12 @@ Vue.config.productionTip = false
 // We'll talk about nested routes later.
 const routes = [
   { path: '/', component: Landing },
-  { path: '/digitize', component: Digitize }
+  { path: '/digitize', component: Digitize },
+  { path: '/developer', component: Developer },
+  { path: '/explore', component: Explore },
+  { path: '/premium', component: Premium },
+  { path: '/product', component: Product },
+  { path: '/signIn', component: SignIn },
 
 ]
 
