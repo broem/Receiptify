@@ -1,9 +1,17 @@
 <template>
- <v-footer class="pa-3 white--text" color="grey" absolute>
-   <div>
-     Developed with ❤️  by 
-     <a href="https://www.github.com/broem" target="_blank">Broem</a> 
-     &copy; {{ new Date().getFullYear() }}
-   </div>
- </v-footer>
+  <div class="foot">
+    Developed with ❤️ by
+    <a href="https://www.github.com/broem" target="_blank">Broem</a>
+    &copy; {{ new Date().getFullYear() }}
+  </div>
 </template>
+
+<style>
+.foot {
+  position: absolute; 
+  text-align: right;
+  bottom: 0%; 
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.548)
+}
+</style>

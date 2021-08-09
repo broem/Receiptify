@@ -21,7 +21,7 @@
       >
     </div>
     <div class="digitize">
-      <aside>
+      <aside>Start Digitizing
         <router-link to="/digitize"
           ><img src="@/assets/RButton.png"
         /></router-link>
@@ -66,14 +66,13 @@ export default {
   width: 100vh;
   height: 100px;
   left: 50%;
-  top: 5%;
+  top: 0%;
 }
 
 .logo {
   width: 100%;
   position: absolute;
-  left: 0%;
-  top: 5%;
+  left: 0%; 
 }
 
 .create_account {
@@ -90,6 +89,6 @@ export default {
   object-fit: contain;
   width: 100%;
   left: 50%;
-  bottom: 5%;
+  bottom: 3%;
 }
 </style>
