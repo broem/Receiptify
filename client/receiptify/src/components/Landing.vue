@@ -89,6 +89,6 @@ export default {
   object-fit: contain;
   width: 100%;
   left: 50%;
-  bottom: 3%;
+  bottom: 2%;
 }
 </style>

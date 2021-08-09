@@ -8,10 +8,14 @@
 
 <style>
 .foot {
-  position: absolute; 
+  position: absolute;
   text-align: right;
-  bottom: 0%; 
-  width:100%;
-  background-color: rgba(0, 0, 0, 0.548)
+  bottom: 0%;
+  width: 100%;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(31, 173, 192, 0.87),
+    rgba(22, 145, 38, 0.61)
+  );
 }
 </style>
