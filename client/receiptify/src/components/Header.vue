@@ -1,10 +1,10 @@
 <template>
 <div id="header"> 
-      <img class="logo" src="@/assets/RLogo.png" /> 
+      <img class="logo" @click="pushLandingPath()" src="@/assets/RLogo.png" /> 
      <div class="nav">
       <v-row no-gutters>
       <v-col v-for="(k,i) in navBar.title" :key="i" cols="12" sm="2">
-        <v-card class="pa-2 nav_card" @click="pushPath(i)">
+        <v-card class="pa-2 nav_card" @click="pushNavPath(i)">
             <div class="nav_card_text">{{k}}</div> 
         </v-card>
       </v-col>
@@ -18,14 +18,18 @@
 export default {
   name:"header",
   data: () => ({
+      //Just add title[x] and route[x] to object below, and it will add to nav-bar.
     navBar:{
       title: ["Premium", "Explore", "Product", "Developer", "Sign In"],
       route: ["/premium", "/explore", "/product", "/developer", "/signIn"]
     } 
   }),
   methods: {
-   pushPath(i) {
+   pushNavPath(i) {
      this.$router.push(this.navBar.route[i]);
+   },
+   pushLandingPath() {
+     this.$router.push("/");
    }
   },
 }
