@@ -1,5 +1,5 @@
 <template>
-    <div>this is sign-in</div>
+    <div style="position:absolute; top:50%">this is sign-in</div>
 </template>
 
 

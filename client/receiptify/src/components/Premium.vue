@@ -1,5 +1,5 @@
 <template>
-    <div>this is premium</div>
+    <div style="position:absolute; top:50%">this is premium</div>
 </template>
 
 

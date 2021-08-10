@@ -1,5 +1,5 @@
 <template>
-    <div>this is explore</div>
+    <div style="position:absolute; top:50%">this is explore</div>
 </template>
 
 

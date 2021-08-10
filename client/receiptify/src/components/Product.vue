@@ -1,5 +1,5 @@
 <template>
-    <div>this is product</div>
+    <div style="position:absolute; top:50%">this is product</div>
 </template>
 
 

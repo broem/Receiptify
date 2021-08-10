@@ -1,5 +1,5 @@
 <template>
-    <div>this is Developer</div>
+    <div style="position:absolute; top:50%">this is Developer</div>
 </template>
 
 
