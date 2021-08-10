@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="main">
     <div class="drop-images"><dropImages></dropImages></div>
 
     <div class="image-preview" v-if="imageData.length > 0">
@@ -82,6 +82,10 @@ export default {
 </script>
 
 <style>
+.main {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
 .drop-images {
   margin-bottom: 1rem;
   width: 100%;

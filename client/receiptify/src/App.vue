@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main>
+      <Header />
       <div id="app">
         <div class="content">
           <!-- Main content -->
@@ -15,12 +16,14 @@
 
 <script>
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 export default {
   name: "App",
 
   components: {
     Footer,
+    Header
   },
 
   data: () => ({
