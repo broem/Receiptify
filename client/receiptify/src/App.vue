@@ -1,34 +1,29 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <h1>Receiptify</h1>
-      </div>
-
-      <v-spacer></v-spacer>
-    </v-app-bar>
-
     <v-main>
-      <Home/>
-      <Footer/>
+      <Header />
+      <div id="app">
+        <div class="content">
+          <!-- Main content -->
+          <event-hub></event-hub>
+          <router-view></router-view>
+        </div>
+      </div>
+      <Footer />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Home from './components/Home';
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    Home,
-    Footer
+    Footer,
+    Header
   },
 
   data: () => ({
