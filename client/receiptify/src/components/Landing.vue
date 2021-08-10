@@ -6,6 +6,7 @@
         color="blue"
         link
         outlined
+        @click="createPath()"
         >Create Account ></v-chip
       >
     </div>
@@ -25,6 +26,11 @@
 <script>
 export default {
   name: "landing",
+  methods: {
+    createPath() {
+      this.$router.push("/createAccount");
+    },
+  },
 };
 </script>
 
@@ -35,9 +41,7 @@ export default {
   height: 100vh;
 }
 
-
-@media(max-width:599px)
-{
+@media (max-width: 599px) {
   .create_account {
     position: absolute;
     left: 60%;
@@ -51,26 +55,25 @@ export default {
     object-fit: contain;
     width: 100%;
     left: 70%;
-    bottom: 2%; 
+    bottom: 2%;
   }
   .digitize_text {
     position: absolute;
-    color: rgb(255, 255, 255); 
+    color: rgb(255, 255, 255);
     background-image: linear-gradient(
-    to right bottom,
-    rgba(10, 15, 15, 0.774),
-    rgba(7, 10, 8, 0.151)
-  );
+      to right bottom,
+      rgba(10, 15, 15, 0.774),
+      rgba(7, 10, 8, 0.151)
+    );
     border-radius: 5%;
     font-size: 20px;
     object-fit: contain;
     width: 175px;
     left: 10%;
-    bottom: 7%; 
+    bottom: 7%;
   }
 }
-@media(min-width:600px)
-{
+@media (min-width: 600px) {
   .create_account {
     position: absolute;
     left: 60%;
@@ -85,16 +88,16 @@ export default {
     object-fit: contain;
     width: 100%;
     left: 60%;
-    bottom: 2%; 
+    bottom: 2%;
   }
   .digitize_text {
     position: absolute;
-    color: rgb(255, 255, 255); 
+    color: rgb(255, 255, 255);
     background-image: linear-gradient(
-    to right bottom,
-    rgba(10, 15, 15, 0.774),
-    rgba(7, 10, 8, 0.151)
-  );
+      to right bottom,
+      rgba(10, 15, 15, 0.774),
+      rgba(7, 10, 8, 0.151)
+    );
     border-radius: 5%;
     font-size: 20px;
     object-fit: contain;
@@ -104,8 +107,7 @@ export default {
   }
 }
 
-@media(min-width:1100px)
-{ 
+@media (min-width: 1100px) {
   .create_account {
     position: absolute;
     left: 80%;
@@ -120,15 +122,15 @@ export default {
     width: 100%;
     left: 50%;
     bottom: 2%;
-  } 
+  }
   .digitize_text {
     position: absolute;
-    color: rgb(255, 255, 255); 
+    color: rgb(255, 255, 255);
     background-image: linear-gradient(
-    to right bottom,
-    rgba(10, 15, 15, 0.774),
-    rgba(7, 10, 8, 0.151)
-  );
+      to right bottom,
+      rgba(10, 15, 15, 0.774),
+      rgba(7, 10, 8, 0.151)
+    );
     border-radius: 5%;
     font-size: 20px;
     object-fit: contain;
