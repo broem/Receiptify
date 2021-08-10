@@ -35,17 +35,17 @@ export default {
   height: 100vh;
 }
 
-.create_account {
-  position: absolute;
-  left: 60%;
-  top: 50%;
-  bottom: 50%;
-  width: 140px;
-  height: 50px;
-}
 
 @media(max-width:599px)
 {
+  .create_account {
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    bottom: 50%;
+    width: 140px;
+    height: 50px;
+  }
   .digitize {
     position: absolute;
     object-fit: contain;
@@ -71,6 +71,15 @@ export default {
 }
 @media(min-width:600px)
 {
+  .create_account {
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    bottom: 50%;
+    width: 140px;
+    height: 50px;
+  }
+
   .digitize {
     position: absolute;
     object-fit: contain;
@@ -97,6 +106,14 @@ export default {
 
 @media(min-width:1100px)
 { 
+  .create_account {
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    bottom: 50%;
+    width: 140px;
+    height: 50px;
+  }
   .digitize {
     position: absolute;
     object-fit: contain;

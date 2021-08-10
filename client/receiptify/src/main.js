@@ -5,11 +5,11 @@ import vuetify from './plugins/vuetify'
 import VueRouter from 'vue-router'
 import Landing from './components/Landing';
 import Digitize from './components/Digitize';
-import Developer from './components/Developer';
-import Explore from './components/Explore';
-import Premium from './components/Premium';
-import Product from './components/Product';
-import SignIn from './components/SignIn';
+import Developer from './components/nav/Developer';
+import Explore from './components/nav/Explore';
+import Premium from './components/nav/Premium';
+import Product from './components/nav/Product';
+import SignIn from './components/nav/SignIn';
 
 Vue.use(VueRouter)
 

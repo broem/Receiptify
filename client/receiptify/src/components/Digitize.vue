@@ -82,10 +82,27 @@ export default {
 </script>
 
 <style>
-.main {
-  margin-top: 100px;
-  margin-bottom: 100px;
+@media (max-width: 599px) {
+  .main {
+    margin-top: 300px;
+    margin-bottom: 300px;
+  }
 }
+
+@media (min-width: 600px) {
+  .main {
+    margin-top: 120px;
+    margin-bottom: 120px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .main {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+}
+
 .drop-images {
   margin-bottom: 1rem;
   width: 100%;
