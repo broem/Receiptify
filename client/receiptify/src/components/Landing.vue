@@ -1,5 +1,7 @@
 <template>
   <div id="landing">
+    <v-parallax class="parallax" dark src="@/assets/background.png">
+    </v-parallax>
     <div class="create_account">
       <v-chip
         style="width:100%; height:100%; text-align:center;"
@@ -16,6 +18,7 @@
         ><img src="@/assets/RButton.png" />
       </router-link>
     </div>
+
     <div class="content">
       <event-hub></event-hub>
       <router-view></router-view>
@@ -35,10 +38,17 @@ export default {
 </script>
 
 <style>
-.landing {
+#landing {
   position: relative;
-  width: 100vh;
+  width: 100%;
   height: 100vh;
+}
+.parallax {
+  position: absolute;
+  transform: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0;
 }
 
 @media (max-width: 599px) {

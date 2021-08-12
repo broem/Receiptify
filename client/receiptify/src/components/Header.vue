@@ -54,12 +54,14 @@ export default {
     width: 165px;
     position: absolute;
     left: 0%;  
+      z-index: 2;
     }
     .nav { 
     position: absolute; 
     left: 75%;
     width: 100px; 
     object-fit: contain; 
+        z-index: 2;
 }
   
 }
@@ -70,12 +72,14 @@ export default {
     width: 331px;
     position: absolute;
     left: 0%;  
+      z-index: 2;
     }  
     .nav { 
     position: absolute; 
     width: 500px; 
     left: 40%;
     object-fit: contain;
+        z-index: 2;
     }
 }
 
@@ -85,12 +89,14 @@ export default {
     width: 331px;
     position: absolute;
     left: 0%;  
+    z-index: 2;
     }  
     .nav { 
     position: absolute; 
     width: 800px; 
     left: 50%;
     object-fit: contain;
+        z-index: 2;
     }
 }
  

@@ -15,13 +15,14 @@
       @dragleave.prevent="dragLeave"
       @drop.prevent="drop($event)"
     >
-      <div class="img" v-for="(img, i) in imageSources" v-bind:key="i">
+      <div class="images" v-for="(img, i) in imageSources" v-bind:key="i">
         <div
           class="image-button-container"
           @mouseenter="activateButton(i)"
           @mouseleave="deactivateButton(i)"
         >
           <img
+            class="image"
             :src="img"
             @click="clickImage(img, i)"
             :class="{ active: i == activeIndex }"
@@ -152,6 +153,7 @@ export default {
   width: 100%;
   align-items: center;
   height: auto;
+  background-color: transparent;
 }
 .image-button-container {
   position: relative;
@@ -175,24 +177,26 @@ export default {
   overflow: auto;
   position: relative;
   width: 100%;
-  height: 875px;
-  background-color: #eee;
+  height: 400px;
+  background-color: rgba(67, 150, 150, 0.274);
   border: 10px solid #eee;
   display: flex;
+  object-fit: fill;
   align-items: center;
   justify-content: right;
   padding: 1rem;
   transition: background-color 0.2s ease-in-out;
   font-family: sans-serif;
+  border: 2px solid red;
 }
 .isDragging {
   background-color: #999;
   border-color: #fff;
 }
 .drop-some-images {
+  color: white;
   position: absolute;
   left: 50;
-  padding-top: 400px;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -202,7 +206,8 @@ export default {
   z-index: 3;
 }
 .manual-image-drop {
-  position: absolute;
+  color: white;
+  position: relative;
   width: 100%;
   padding-top: 20px;
   align-items: center;
@@ -214,49 +219,17 @@ export default {
 #uploadmyfile {
   display: none;
 }
-@media (max-width: 600px) {
-  .img {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 300px;
-    height: 200px;
-    z-index: 1;
-    object-fit: contain;
-  }
+
+.images {
+  padding: 1rem;
+  display: block;
+  align-items: center;
+  max-height: 300px !important;
+  z-index: 1;
+  border: 2px solid red;
 }
-@media (min-width: 601px) {
-  .img {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-    z-index: 1;
-    object-fit: contain;
-  }
-}
-@media (min-width: 1000px) {
-  .img {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 400px;
-    z-index: 1;
-    object-fit: contain;
-  }
-}
-@media (min-width: 1300px) {
-  .img {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 500px;
-    z-index: 1;
-    object-fit: contain;
-  }
+
+.image {
+  max-height: 300px !important;
 }
 </style>

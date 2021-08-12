@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <Header />
-      <div id="app">
+      <div id="app"> 
         <div class="content">
           <!-- Main content -->
           <event-hub></event-hub>
@@ -23,11 +23,11 @@ export default {
 
   components: {
     Footer,
-    Header
+    Header,
   },
 
   data: () => ({
     //
   }),
 };
-</script>
+</script> 
