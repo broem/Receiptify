@@ -1,6 +1,6 @@
 <template>
   <div id="landing">
-    <v-parallax class="parallax" dark src="@/assets/background.png">
+    <v-parallax class="parallax" src="@/assets/background.png">
     </v-parallax>
     <div class="create_account">
       <v-chip

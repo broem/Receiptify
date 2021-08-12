@@ -1,6 +1,6 @@
 <template>
   <div id="digitize">
-    <v-parallax class="parallax" dark src="@/assets/background.png">
+    <v-parallax class="parallax" src="@/assets/background.png">
     </v-parallax>
     <div class="margin">
       <div class="drop-images"><dropImages></dropImages></div>
@@ -90,7 +90,7 @@ export default {
   width: 100%;
   height: auto;
 }
-/* changes all parallax elements in app. */
+/* changes all parallax elements in app.:/ */
 .v-parallax__image {
   transform: none !important;
   width: 100% !important;
@@ -154,7 +154,6 @@ export default {
     border: 2px solid red;
   }
   .image_preview {
-    overflow-x: scroll;
     padding: 1rem;
     position: relative;
     align-items: center;
@@ -171,7 +170,9 @@ export default {
     align-items: center;
     justify-content: center;
     text-align: center;
+    overflow-x: scroll;
     height: 400px;
+    max-width: 300px;
     border: 2px solid red;
   }
 
