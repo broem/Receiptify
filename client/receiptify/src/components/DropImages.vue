@@ -8,38 +8,41 @@
         Drop some images
       </h1>
     </div>
-    <div
-      class="drop"
-      :class="getClasses"
-      @dragover.prevent="dragOver"
-      @dragleave.prevent="dragLeave"
-      @drop.prevent="drop($event)"
-    >
-      <div class="images" v-for="(img, i) in imageSources" v-bind:key="i">
-        <div
-          class="image-button-container"
-          @mouseenter="activateButton(i)"
-          @mouseleave="deactivateButton(i)"
-        >
-          <img
-            class="image"
-            :src="img"
-            @click="clickImage(img, i)"
-            :class="{ active: i == activeIndex }"
-          />
-          <v-btn
-            class="delete-button"
-            small
-            outlined
-            v-if="activateDeleteButton && i == activeIndex"
-            color="warning"
-            v-on:click="removeImage(i)"
+    <v-sheet color="transparent" elevation="9" height="auto" rounded width="auto">
+      <div
+        class="drop"
+        :class="getClasses"
+        @dragover.prevent="dragOver"
+        @dragleave.prevent="dragLeave"
+        @drop.prevent="drop($event)"
+      >
+        <div class="images" v-for="(img, i) in imageSources" v-bind:key="i">
+          <div
+            class="image-button-container"
+            @mouseenter="activateButton(i)"
+            @mouseleave="deactivateButton(i)"
           >
-            Delete</v-btn
-          >
+            <img
+              class="image"
+              :src="img"
+              @click="clickImage(img, i)"
+              :class="{ active: i == activeIndex }"
+            />
+            <v-btn
+              class="delete-button"
+              small
+              outlined
+              v-if="activateDeleteButton && i == activeIndex"
+              color="warning"
+              v-on:click="removeImage(i)"
+            >
+              Delete</v-btn
+            >
+          </div>
         </div>
-      </div>
-    </div>
+      </div></v-sheet
+    >
+
     <div class="manual-image-drop">
       <label for="uploadmyfile">
         <p>or pick from device</p>
@@ -178,8 +181,7 @@ export default {
   position: relative;
   width: 100%;
   height: 400px;
-  background-color: rgba(67, 150, 150, 0.274);
-  border: 10px solid #eee;
+  background-color: rgba(67, 150, 150, 0.274); 
   display: flex;
   object-fit: fill;
   align-items: center;
@@ -187,8 +189,8 @@ export default {
   padding: 1rem;
   transition: background-color 0.2s ease-in-out;
   font-family: sans-serif;
-  border: 2px solid red;
 }
+
 .isDragging {
   background-color: #999;
   border-color: #fff;
@@ -226,7 +228,6 @@ export default {
   align-items: center;
   max-height: 300px !important;
   z-index: 1;
-  border: 2px solid red;
 }
 
 .image {

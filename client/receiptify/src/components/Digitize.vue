@@ -2,6 +2,7 @@
   <div id="digitize">
     <div class="margin">
       <div class="drop-images"><dropImages></dropImages></div>
+
       <div class="button_row">
         <v-btn
           class="convert_button"
@@ -94,7 +95,6 @@ export default {
   width: 100%;
   height: 100%;
   padding-top: 100px;
-  border: 2px solid red;
 }
 
 .convert_button {
@@ -126,7 +126,6 @@ export default {
     text-align: center;
     height: 1000px;
     width: auto;
-    border: 2px solid red;
     margin-bottom: 100px;
   }
 
@@ -148,7 +147,6 @@ export default {
     text-align: center;
     max-width: 300px;
     height: 400px;
-    border: 2px solid red;
   }
 
   .preview {
@@ -160,7 +158,6 @@ export default {
     overflow-x: scroll;
     height: 400px;
     max-width: 300px;
-    border: 2px solid red;
   }
 
   .translated_text {
@@ -172,7 +169,6 @@ export default {
     text-align: center;
     width: 300px;
     max-height: 400px;
-    border: 2px solid red;
     word-wrap: break-word;
     overflow-y: auto;
     left: 9%;
@@ -193,7 +189,6 @@ export default {
     text-align: center;
     height: 500px;
     width: auto;
-    border: 2px solid red;
     margin-bottom: 100px;
   }
 
@@ -206,7 +201,6 @@ export default {
     text-align: center;
     height: 100px;
     width: auto;
-    border: 2px solid red;
   }
   .image_preview {
     padding: 1rem;
@@ -215,7 +209,6 @@ export default {
     justify-content: center;
     text-align: center;
     height: 400px;
-    border: 2px solid red;
   }
 
   .preview {
@@ -225,7 +218,6 @@ export default {
     justify-content: center;
     text-align: center;
     height: 400px;
-    border: 2px solid red;
   }
 
   .translated_text {
@@ -237,7 +229,6 @@ export default {
     text-align: center;
     width: 400px;
     max-height: 400px;
-    border: 2px solid red;
     word-wrap: break-word;
     overflow-y: auto;
   }
