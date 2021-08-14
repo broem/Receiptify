@@ -10,7 +10,7 @@
         >Create Account ></v-chip
       >
     </div>
-    <div class="digitize_text">Start Digitizing >>></div>
+    <div class="digitize_label"><img class="d_label" src="@/assets/digitizeLabel.png"></div>
     <div class="digitize">
       <router-link to="/digitize"
         ><img src="@/assets/digitize.png" />
@@ -58,20 +58,16 @@ export default {
     left: 55%;
     bottom: 0%;
   }
-  .digitize_text {
-    position: absolute;
-    color: rgb(255, 255, 255);
-    background-image: linear-gradient(
-      to right bottom,
-      rgba(10, 15, 15, 0.774),
-      rgba(7, 10, 8, 0.151)
-    );
-    border-radius: 5%;
-    font-size: 20px;
+  .digitize_label {
+    position: absolute;  
     object-fit: contain;
-    width: 175px;
-    left: 10%;
+    width: auto;
+    left: 15%;
     bottom: 7%;
+  }
+ 
+ .d_label {
+    width: 200px !important;
   }
 }
 @media (min-width: 600px) {
@@ -91,20 +87,16 @@ export default {
     left: 60%;
     bottom: 2%;
   }
-  .digitize_text {
-    position: absolute;
-    color: rgb(255, 255, 255);
-    background-image: linear-gradient(
-      to right bottom,
-      rgba(10, 15, 15, 0.774),
-      rgba(7, 10, 8, 0.151)
-    );
-    border-radius: 5%;
-    font-size: 20px;
+  .digitize_label {
+    position: absolute;  
     object-fit: contain;
-    width: 175px;
+    width: auto;
     left: 15%;
     bottom: 7%;
+  }
+
+   .d_label {
+    width: 200px !important;
   }
 }
 
@@ -124,20 +116,16 @@ export default {
     left: 50%;
     bottom: 2%;
   }
-  .digitize_text {
-    position: absolute;
-    color: rgb(255, 255, 255);
-    background-image: linear-gradient(
-      to right bottom,
-      rgba(10, 15, 15, 0.774),
-      rgba(7, 10, 8, 0.151)
-    );
-    border-radius: 5%;
-    font-size: 20px;
+  .digitize_label {
+    position: absolute;  
     object-fit: contain;
-    width: 175px;
-    left: 30%;
+    width: auto;
+    left: 15%;
     bottom: 7%;
+  }
+
+   .d_label {
+    width: 400px !important;
   }
 }
 </style>
