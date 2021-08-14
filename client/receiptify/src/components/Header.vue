@@ -1,6 +1,6 @@
 <template>
 <div id="header"> 
-      <img class="logo" @click="pushLandingPath()" src="@/assets/RLogo.png" /> 
+      <img class="logo" @click="pushLandingPath()" src="@/assets/receiptifyLogo.png" /> 
      <div class="nav">
       <v-row no-gutters>
       <v-col v-for="(k,i) in navBar.title" :key="i" cols="12" sm="2">
@@ -51,7 +51,7 @@ export default {
  @media(max-width:599px)
 {
     .logo {
-    width: 165px;
+    width: 200px;
     position: absolute;
     left: 0%;  
       z-index: 2;
@@ -69,7 +69,7 @@ export default {
 @media(min-width:600px)
 {
     .logo {
-    width: 331px;
+    width: 300px;
     position: absolute;
     left: 0%;  
       z-index: 2;
@@ -86,7 +86,7 @@ export default {
 @media(min-width:1100px)
 {
     .logo {
-    width: 331px;
+    width: 500px;
     position: absolute;
     left: 0%;  
     z-index: 2;
