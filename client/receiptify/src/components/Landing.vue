@@ -1,7 +1,5 @@
 <template>
-  <div id="landing">
-    <v-parallax class="parallax" src="@/assets/background.png">
-    </v-parallax>
+  <div id="landing"> 
     <div class="create_account">
       <v-chip
         style="width:100%; height:100%; text-align:center;"
@@ -15,7 +13,7 @@
     <div class="digitize_text">Start Digitizing >>></div>
     <div class="digitize">
       <router-link to="/digitize"
-        ><img src="@/assets/RButton.png" />
+        ><img src="@/assets/digitize.png" />
       </router-link>
     </div>
 
@@ -43,13 +41,6 @@ export default {
   width: 100%;
   height: 100vh;
 }
-.parallax {
-  position: absolute;
-  transform: none !important;
-  width: 100% !important;
-  height: 100% !important;
-  left: 0;
-}
 
 @media (max-width: 599px) {
   .create_account {
@@ -64,8 +55,8 @@ export default {
     position: absolute;
     object-fit: contain;
     width: 100%;
-    left: 70%;
-    bottom: 2%;
+    left: 55%;
+    bottom: 0%;
   }
   .digitize_text {
     position: absolute;

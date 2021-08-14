@@ -43,8 +43,8 @@ export default {
   height: 4vh;
   background-image: linear-gradient(
     to right bottom,
-    rgba(2, 3, 3, 0.575),
-    rgba(255, 255, 255, 0.075)
+    rgba(2, 3, 3, 0.699),
+    rgba(255, 255, 255, 0.26)
   );
 }
  
@@ -103,8 +103,8 @@ export default {
  .nav_card {
   background-image: linear-gradient(
     to right bottom,
-    rgba(10, 15, 15, 0.774),
-    rgba(7, 10, 8, 0.151)
+    rgba(10, 15, 15, 0.884),
+    rgba(7, 10, 8, 0.342)
   );
   border-radius: 15%;
 

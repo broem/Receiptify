@@ -1,7 +1,5 @@
 <template>
   <div id="digitize">
-    <v-parallax class="parallax" src="@/assets/background.png">
-    </v-parallax>
     <div class="margin">
       <div class="drop-images"><dropImages></dropImages></div>
       <div class="button_row">
@@ -90,19 +88,7 @@ export default {
   width: 100%;
   height: auto;
 }
-/* changes all parallax elements in app.:/ */
-.v-parallax__image {
-  transform: none !important;
-  width: 100% !important;
-  left: 0;
-}
-.parallax {
-  position: absolute;
-  transform: none !important;
-  width: 100% !important;
-  height: 100% !important;
-  left: 0;
-}
+
 .drop-images {
   position: relative;
   width: 100%;
@@ -141,6 +127,7 @@ export default {
     height: 1000px;
     width: auto;
     border: 2px solid red;
+    margin-bottom: 100px;
   }
 
   .button_row {
@@ -207,6 +194,7 @@ export default {
     height: 500px;
     width: auto;
     border: 2px solid red;
+    margin-bottom: 100px;
   }
 
   .button_row {
