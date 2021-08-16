@@ -14,8 +14,8 @@
   width: 100%;
   background-image: linear-gradient(
     to right bottom,
-    rgba(31, 173, 192, 0.87),
-    rgba(22, 145, 38, 0.61)
+    rgba(14, 16, 82, 0.616),
+    rgba(25, 19, 56, 0.349)
   );
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div id="header"> 
-      <img class="logo" @click="pushLandingPath()" src="@/assets/RLogo.png" /> 
+      <img class="logo" @click="pushLandingPath()" src="@/assets/receiptifyLogo.png" /> 
      <div class="nav">
       <v-row no-gutters>
       <v-col v-for="(k,i) in navBar.title" :key="i" cols="12" sm="2">
@@ -43,23 +43,25 @@ export default {
   height: 4vh;
   background-image: linear-gradient(
     to right bottom,
-    rgba(2, 3, 3, 0.575),
-    rgba(255, 255, 255, 0.075)
+    rgba(2, 3, 3, 0.699),
+    rgba(255, 255, 255, 0.26)
   );
 }
  
  @media(max-width:599px)
 {
     .logo {
-    width: 165px;
+    width: 200px;
     position: absolute;
     left: 0%;  
+      z-index: 2;
     }
     .nav { 
     position: absolute; 
     left: 75%;
     width: 100px; 
     object-fit: contain; 
+        z-index: 2;
 }
   
 }
@@ -67,38 +69,42 @@ export default {
 @media(min-width:600px)
 {
     .logo {
-    width: 331px;
+    width: 300px;
     position: absolute;
     left: 0%;  
+      z-index: 2;
     }  
     .nav { 
     position: absolute; 
     width: 500px; 
     left: 40%;
     object-fit: contain;
+        z-index: 2;
     }
 }
 
 @media(min-width:1100px)
 {
     .logo {
-    width: 331px;
+    width: 500px;
     position: absolute;
     left: 0%;  
+    z-index: 2;
     }  
     .nav { 
     position: absolute; 
     width: 800px; 
     left: 50%;
     object-fit: contain;
+        z-index: 2;
     }
 }
  
  .nav_card {
   background-image: linear-gradient(
     to right bottom,
-    rgba(10, 15, 15, 0.774),
-    rgba(7, 10, 8, 0.151)
+    rgba(10, 15, 15, 0.884),
+    rgba(7, 10, 8, 0.342)
   );
   border-radius: 15%;
 

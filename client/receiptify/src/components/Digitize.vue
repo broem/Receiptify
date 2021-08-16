@@ -1,36 +1,38 @@
 <template>
-  <v-container class="main">
-    <div class="drop-images"><dropImages></dropImages></div>
+  <div id="digitize">
+    <div class="margin">
+      <div class="drop-images"><dropImages></dropImages></div>
 
-    <div class="image-preview" v-if="imageData.length > 0">
-      <img class="preview" :src="imageData" />
-    </div>
-    <v-btn
-      large
-      outlined
-      :disabled="imageData.length == 0"
-      color="primary"
-      v-on:click="convertImg"
-      >Convert</v-btn
-    >
-    <div>
-      <p>Text</p>
-      <div v-if="translatedText.length > 0">
-        <pre style="width:100%;overflow:scroll;background-color:aliceblue;">{{
-          translatedText
-        }}</pre>
+      <div class="button_row">
+        <v-btn
+          class="convert_button"
+          large
+          outlined
+          :disabled="imageData.length == 0"
+          color="primary"
+          v-on:click="convertImg"
+          >Convert</v-btn
+        >
+        <v-btn
+          class="file-gen-csv csv_button"
+          small
+          outlined
+          :disabled="translatedText.length == 0"
+          color="primary"
+          v-on:click="genCsv"
+          >Generate Csv</v-btn
+        >
+      </div>
+      <div class="flex_wrapper">
+        <div class="image-preview" v-if="imageData.length > 0">
+          <img class="preview" :src="imageData" />
+        </div>
+        <div class="translated_text">
+          {{ translatedText }}
+        </div>
       </div>
     </div>
-    <v-btn
-      class="file-gen-csv"
-      small
-      outlined
-      :disabled="translatedText.length == 0"
-      color="primary"
-      v-on:click="genCsv"
-      >Generate Csv</v-btn
-    >
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -82,30 +84,165 @@ export default {
 </script>
 
 <style>
-@media (max-width: 599px) {
-  .main {
-    margin-top: 300px;
-    margin-bottom: 300px;
-  }
+#digitize {
+  position: relative;
+  width: 100%;
+  height: auto;
 }
 
+.drop-images {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+}
+
+.convert_button {
+  padding: 1rem;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 200px;
+  height: 120px;
+}
+
+.csv_button {
+  padding: 1rem;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 200px;
+  height: 120px;
+}
+
+@media (max-width: 599px) {
+  .flex_wrapper {
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 1000px;
+    width: auto;
+    margin-bottom: 100px;
+  }
+
+  .button_row {
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 120px;
+    width: auto;
+    border: 2px solid red;
+  }
+  .image_preview {
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 300px;
+    height: 400px;
+  }
+
+  .preview {
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow-x: scroll;
+    height: 400px;
+    max-width: 300px;
+  }
+
+  .translated_text {
+    color: rgb(40, 185, 65);
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 300px;
+    max-height: 400px;
+    word-wrap: break-word;
+    overflow-y: auto;
+    left: 9%;
+  }
+
+  .margin {
+    margin-left: 1vh;
+    margin-right: 1vh;
+  }
+}
 @media (min-width: 600px) {
-  .main {
-    margin-top: 120px;
-    margin-bottom: 120px;
+  .flex_wrapper {
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 500px;
+    width: auto;
+    margin-bottom: 100px;
+  }
+
+  .button_row {
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100px;
+    width: auto;
+  }
+  .image_preview {
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 400px;
+  }
+
+  .preview {
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 400px;
+  }
+
+  .translated_text {
+    color: rgb(40, 185, 65);
+    padding: 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 400px;
+    max-height: 400px;
+    word-wrap: break-word;
+    overflow-y: auto;
+  }
+
+  .margin {
+    margin-left: 5vh;
+    margin-right: 5vh;
   }
 }
 
 @media (min-width: 1100px) {
-  .main {
-    margin-top: 100px;
-    margin-bottom: 100px;
+  .margin {
+    margin-left: 10vh;
+    margin-right: 10vh;
   }
-}
-
-.drop-images {
-  margin-bottom: 1rem;
-  width: 100%;
-  height: 100%; /* was 50% */
 }
 </style>
