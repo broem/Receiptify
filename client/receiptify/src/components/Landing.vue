@@ -166,12 +166,6 @@ extend("password_strength", {
 
 export default {
   name: "landing",
-
-  data: () => {
-    return {
-      validated: false,
-    };
-  },
   components: {
     ValidationProvider,
     ValidationObserver,
