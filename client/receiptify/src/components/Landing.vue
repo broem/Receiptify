@@ -19,54 +19,78 @@
                 >Lets get an account setup.</v-toolbar
               >
               <v-card-text>
-                <v-form ref="form" v-model="valid" lazy-validation>
-                  <v-text-field
-                    v-model="name"
-                    :counter="10"
-                    :rules="nameRules"
-                    label="Name"
-                    required
-                  ></v-text-field>
-
-                  <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    required
-                  ></v-text-field>
-
-                  <v-select
-                    v-model="select"
-                    :items="items"
-                    :rules="[(v) => !!v || 'Item is required']"
-                    label="Item"
-                    required
-                  ></v-select>
-
-                  <v-checkbox
-                    v-model="checkbox"
-                    :rules="[(v) => !!v || 'You must agree to continue!']"
-                    label="Do you agree?"
-                    required
-                  ></v-checkbox>
-
-                  <v-btn
-                    :disabled="!valid"
-                    color="success"
-                    class="mr-4"
-                    @click="validate"
+                <ValidationObserver ref="observer" v-slot="{ invalid }">
+                  <v-form
+                    ref="form"
+                    v-model="valid"
+                    lazy-validation
+                    v-on:submit.prevent="submit()"
                   >
-                    Validate
-                  </v-btn>
+                    <ValidationProvider
+                      rules="required|name_length"
+                      debounce="1000"
+                      v-slot="{ errors }"
+                    >
+                      <v-text-field
+                        v-model="name"
+                        hide-details="auto"
+                        label="Name"
+                      ></v-text-field>
+                      <span id="error">{{ errors[0] }}</span>
+                    </ValidationProvider>
+                    <ValidationProvider
+                      rules="required|email"
+                      debounce="1000"
+                      v-slot="{ errors }"
+                    >
+                      <v-text-field
+                        hide-details="auto"
+                        v-model="email"
+                        label="Email"
+                      ></v-text-field>
+                      <span id="error">{{ errors[0] }}</span>
+                    </ValidationProvider>
+                    <ValidationProvider
+                      rules="required|password_length|password_strength|confirmed:confirmation"
+                      debounce="1000"
+                      v-slot="{ errors }"
+                    >
+                      <v-text-field
+                        type="password"
+                        hide-details="auto"
+                        v-model="password"
+                        label="Password"
+                      ></v-text-field>
+                      <span id="error">{{ errors[0] }}</span>
+                    </ValidationProvider>
+                    <ValidationProvider
+                      rules="required"
+                      vid="confirmation"
+                      debounce="1000"
+                      v-slot="{ errors }"
+                    >
+                      <v-text-field
+                        type="password"
+                        hide-details="auto"
+                        v-model="confirm_password"
+                        label="Confirm Password"
+                      ></v-text-field>
+                      <span id="error">{{ errors[0] }}</span>
+                    </ValidationProvider>
 
-                  <v-btn color="error" class="mr-4" @click="reset">
-                    Reset Form
-                  </v-btn>
+                    <v-btn :disabled="invalid" type="submit" value="Submit">
+                      Submit
+                    </v-btn>
 
-                  <v-btn color="warning" @click="resetValidation">
-                    Reset Validation
-                  </v-btn>
-                </v-form>
+                    <v-btn color="error" class="mr-4" @click="reset">
+                      Reset Form
+                    </v-btn>
+
+                    <v-btn color="warning" @click="resetValidation">
+                      Reset Validation
+                    </v-btn>
+                  </v-form></ValidationObserver
+                >
               </v-card-text>
               <v-card-actions class="justify-end">
                 <v-btn text @click="dialog.value = false">Close</v-btn>
@@ -93,24 +117,65 @@
 </template>
 
 <script>
+import { ValidationProvider, ValidationObserver } from "vee-validate";
+import { extend } from "vee-validate";
+import { required, confirmed } from "vee-validate/dist/rules";
+
+extend("confirmed", {
+  ...confirmed,
+  message: "Passwords needs to match.",
+});
+
+extend("required", {
+  ...required,
+  message: "This field is required",
+});
+
+extend("name_length", {
+  validate: (value) => {
+    return (value.length < 10 && value.length > 1) || "Name is invalid.";
+  },
+});
+
+extend("email", {
+  validate: (value) => {
+    return (
+      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+      "E-mail must be valid"
+    );
+  },
+});
+
+extend("password_length", {
+  validate: (value) => {
+    return value.length >= 8 || "Use 8 characters or more for your password";
+  },
+});
+
+extend("password_strength", {
+  validate: (value) => {
+    return (
+      (/[a-z]+/.test(value) &&
+        /[A-Z]+/.test(value) &&
+        /\d+/.test(value) &&
+        /[^a-zA-Z0-9]+/.test(value)) ||
+      "Please choose a stronger password. Try a mix of letters, numbers, and symbols."
+    );
+  },
+});
+
 export default {
   name: "landing",
-  data: () => ({
-    valid: true,
-    name: "",
-    nameRules: [
-      (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-    ],
-    email: "",
-    emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-    ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false,
-  }),
+
+  data: () => {
+    return {
+      validated: false,
+    };
+  },
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+  },
   methods: {
     validate() {
       this.$refs.form.validate();
@@ -120,6 +185,14 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+    async submit() {
+      const isValid = await this.$refs.observer.validate();
+      if (isValid) {
+        console.log("validated! and account added!"); //logic for adding account information goes here.
+      } else {
+        alert("Data isn't valid");
+      }
     },
   },
 };
