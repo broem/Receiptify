@@ -18,7 +18,7 @@
 export default {
   name:"header",
   data: () => ({
-      //Just add title[x] and route[x] to object below, and it will add to nav-bar.
+      //Just add title[x] and route[x] to object below, and it will add to nav-bar. :)
     navBar:{
       title: ["Premium", "Explore", "Product", "Developer", "Sign In"],
       route: ["/premium", "/explore", "/product", "/developer", "/signIn"]
@@ -43,25 +43,27 @@ export default {
   height: 4vh;
   background-image: linear-gradient(
     to right bottom,
-    rgba(2, 3, 3, 0.699),
-    rgba(255, 255, 255, 0.26)
+    rgba(9, 46, 28, 0.788),
+    rgba(6, 19, 5, 0.432)
   );
 }
  
  @media(max-width:599px)
 {
     .logo {
-    width: 200px;
+    width: 180px;
     position: absolute;
     left: 0%;  
-      z-index: 2;
+    z-index: 2;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), 10px 10px 15px rgba(0, 0, 0, 0.5),
+    -1px -1px 30px rgba(0, 0, 0, 0.2);
     }
     .nav { 
     position: absolute; 
     left: 75%;
     width: 100px; 
     object-fit: contain; 
-        z-index: 2;
+    z-index: 2;
 }
   
 }
@@ -69,42 +71,46 @@ export default {
 @media(min-width:600px)
 {
     .logo {
-    width: 300px;
+    width: 240px;
     position: absolute;
     left: 0%;  
-      z-index: 2;
+    z-index: 2;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), 10px 10px 15px rgba(0, 0, 0, 0.5),
+    -1px -1px 30px rgba(0, 0, 0, 0.2);
     }  
     .nav { 
     position: absolute; 
     width: 500px; 
     left: 40%;
     object-fit: contain;
-        z-index: 2;
+    z-index: 2;
     }
 }
 
 @media(min-width:1100px)
 {
     .logo {
-    width: 500px;
+    width: 400px;
     position: absolute;
     left: 0%;  
     z-index: 2;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), 10px 10px 15px rgba(0, 0, 0, 0.5),
+    -1px -1px 30px rgba(0, 0, 0, 0.2);
     }  
     .nav { 
     position: absolute; 
     width: 800px; 
     left: 50%;
     object-fit: contain;
-        z-index: 2;
+    z-index: 2;
     }
 }
  
  .nav_card {
   background-image: linear-gradient(
     to right bottom,
-    rgba(10, 15, 15, 0.884),
-    rgba(7, 10, 8, 0.342)
+    rgba(5, 22, 22, 0.884),
+    rgba(6, 5, 24, 0.678)
   );
   border-radius: 15%;
 

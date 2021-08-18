@@ -30,7 +30,7 @@
                     lazy-validation
                     v-on:submit.prevent="submit()"
                   >
-                    <ValidationProvider
+                      <ValidationProvider
                       rules="required|name_length|name_chars"
                       debounce="1000"
                       v-slot="{ errors }"
@@ -56,7 +56,7 @@
                       ></v-text-field>
                       <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
-
+                
                     <ValidationProvider
                       rules="required|email"
                       debounce="1000"
@@ -290,7 +290,7 @@ export default {
   }
 
   .d_label {
-    width: 200px !important;
+    width: 180px !important;
   }
 }
 @media (min-width: 600px) {
@@ -343,12 +343,12 @@ export default {
     position: absolute;
     object-fit: contain;
     width: auto;
-    left: 15%;
+    left: 20%;
     bottom: 7%;
   }
 
   .d_label {
-    width: 400px !important;
+    width: 280px !important;
   }
 }
 </style>
