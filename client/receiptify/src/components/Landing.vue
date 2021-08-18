@@ -37,9 +37,9 @@
                     >
                       <v-text-field
                         class="field"
-                        v-model="first_name"
+                        v-model="last_name"
                         hide-details="auto"
-                        label="First Name"
+                        label="Last Name"
                       ></v-text-field>
                       <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
@@ -50,12 +50,13 @@
                     >
                       <v-text-field
                         class="field"
-                        v-model="last_name"
+                        v-model="first_name"
                         hide-details="auto"
-                        label="Last Name"
+                        label="First Name"
                       ></v-text-field>
                       <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
+
                     <ValidationProvider
                       rules="required|email"
                       debounce="1000"
