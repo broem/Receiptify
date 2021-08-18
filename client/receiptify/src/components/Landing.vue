@@ -2,10 +2,14 @@
   <div id="landing">
     <div class="create_account">
       <v-col cols="auto">
-        <v-dialog transition="dialog-bottom-transition" max-width="600">
+        <v-dialog
+          ref="dialog"
+          transition="dialog-bottom-transition"
+          max-width="600"
+        >
           <template v-slot:activator="{ on, attrs }">
             <v-chip
-              style="width:120px; height:40px; text-align:center;"
+              style="width:170px; height:40px; text-align:center;"
               color="blue"
               v-bind="attrs"
               v-on="on"
@@ -27,16 +31,30 @@
                     v-on:submit.prevent="submit()"
                   >
                     <ValidationProvider
-                      rules="required|name_length"
+                      rules="required|name_length|name_chars"
                       debounce="1000"
                       v-slot="{ errors }"
                     >
                       <v-text-field
-                        v-model="name"
+                        class="field"
+                        v-model="first_name"
                         hide-details="auto"
-                        label="Name"
+                        label="First Name"
                       ></v-text-field>
-                      <span id="error">{{ errors[0] }}</span>
+                      <div class="error_box" id="error">{{ errors[0] }}</div>
+                    </ValidationProvider>
+                    <ValidationProvider
+                      rules="required|name_length|name_chars"
+                      debounce="1000"
+                      v-slot="{ errors }"
+                    >
+                      <v-text-field
+                        class="field"
+                        v-model="last_name"
+                        hide-details="auto"
+                        label="Last Name"
+                      ></v-text-field>
+                      <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
                     <ValidationProvider
                       rules="required|email"
@@ -44,11 +62,12 @@
                       v-slot="{ errors }"
                     >
                       <v-text-field
-                        hide-details="auto"
+                        class="field"
                         v-model="email"
+                        hide-details="auto"
                         label="Email"
                       ></v-text-field>
-                      <span id="error">{{ errors[0] }}</span>
+                      <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
                     <ValidationProvider
                       rules="required|password_length|password_strength|confirmed:confirmation"
@@ -56,12 +75,13 @@
                       v-slot="{ errors }"
                     >
                       <v-text-field
+                        class="field"
                         type="password"
-                        hide-details="auto"
                         v-model="password"
+                        hide-details="auto"
                         label="Password"
                       ></v-text-field>
-                      <span id="error">{{ errors[0] }}</span>
+                      <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
                     <ValidationProvider
                       rules="required"
@@ -70,31 +90,41 @@
                       v-slot="{ errors }"
                     >
                       <v-text-field
+                        class="field"
                         type="password"
                         hide-details="auto"
                         v-model="confirm_password"
                         label="Confirm Password"
                       ></v-text-field>
-                      <span id="error">{{ errors[0] }}</span>
+                      <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
+                    <div class="button_row">
+                      <v-btn
+                        class="global_button"
+                        :disabled="invalid"
+                        type="submit"
+                        value="Submit"
+                      >
+                        Create
+                      </v-btn>
 
-                    <v-btn :disabled="invalid" type="submit" value="Submit">
-                      Submit
-                    </v-btn>
-
-                    <v-btn color="error" class="mr-4" @click="reset">
-                      Reset Form
-                    </v-btn>
-
-                    <v-btn color="warning" @click="resetValidation">
-                      Reset Validation
-                    </v-btn>
+                      <v-btn
+                        class="global_button mr-4"
+                        color="error"
+                        @click="reset"
+                      >
+                        Reset Form
+                      </v-btn>
+                      <v-btn
+                        class="global_button"
+                        text
+                        @click="dialog.value = false"
+                        >Close</v-btn
+                      >
+                    </div>
                   </v-form></ValidationObserver
                 >
               </v-card-text>
-              <v-card-actions class="justify-end">
-                <v-btn text @click="dialog.value = false">Close</v-btn>
-              </v-card-actions>
             </v-card>
           </template>
         </v-dialog>
@@ -133,7 +163,16 @@ extend("required", {
 
 extend("name_length", {
   validate: (value) => {
-    return (value.length < 10 && value.length > 1) || "Name is invalid.";
+    return (value.length < 15 && value.length > 1) || "Name is invalid.";
+  },
+});
+
+extend("name_chars", {
+  validate: (value) => {
+    return (
+      (/[^a-zA-Z0-9]+/.test(value) == false && /[0-9]+/.test(value) == false) ||
+      "Your using invalid characters."
+    );
   },
 });
 
@@ -171,19 +210,14 @@ export default {
     ValidationObserver,
   },
   methods: {
-    validate() {
-      this.$refs.form.validate();
-    },
     reset() {
       this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
     },
     async submit() {
       const isValid = await this.$refs.observer.validate();
       if (isValid) {
-        console.log("validated! and account added!"); //logic for adding account information goes here.
+        alert("Account was successfully Created."); //account is ready to be added.
+        this.reset();
       } else {
         alert("Data isn't valid");
       }
@@ -201,6 +235,33 @@ export default {
 
 .account_registration_header {
   background-color: rgba(47, 44, 54, 0.397);
+  margin-bottom: 30px;
+}
+
+.field {
+  position: relative;
+  margin: 5px;
+  padding: 10px;
+  height: 50px;
+}
+
+.error_box {
+  height: 30px;
+}
+
+.button_row {
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: auto;
+}
+
+.global_button {
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
 }
 
 @media (max-width: 599px) {
@@ -209,7 +270,7 @@ export default {
     left: 60%;
     top: 50%;
     bottom: 50%;
-    width: 140px;
+    width: 170px;
     height: 50px;
   }
   .digitize {
@@ -237,7 +298,7 @@ export default {
     left: 60%;
     top: 50%;
     bottom: 50%;
-    width: 140px;
+    width: 170px;
     height: 50px;
   }
 
@@ -267,7 +328,7 @@ export default {
     left: 80%;
     top: 50%;
     bottom: 50%;
-    width: 140px;
+    width: 170px;
     height: 50px;
   }
   .digitize {
