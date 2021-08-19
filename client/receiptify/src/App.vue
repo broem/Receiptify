@@ -34,20 +34,20 @@ export default {
 </script>
 
 <style>
-/* changes all parallax elements in app.:/ */
+/* changes all parallax elements in app. */
 .v-parallax__image {
   overflow: hidden;
   transform: none !important;
-  height: 1487px !important;
-  width: 1924px !important;
+  height: 5167px !important;
+  width: 5177px !important;
   left: 0%;  
   bottom: 0%; 
 }
 .parallax {
   overflow: hidden;
   position: fixed;
-  height: 1487px !important;
-  width: 1924px !important;
+  height: 5167px !important;
+  width: 5177px !important;
   left: 0%;
   bottom: 0%;
 }
