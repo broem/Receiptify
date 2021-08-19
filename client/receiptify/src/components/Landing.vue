@@ -2,8 +2,7 @@
   <div id="landing">
     <div class="create_account">
       <v-col cols="auto">
-        <v-dialog
-          ref="dialog"
+        <v-dialog 
           transition="dialog-bottom-transition"
           max-width="600"
         >
@@ -30,7 +29,7 @@
                     lazy-validation
                     v-on:submit.prevent="submit()"
                   >
-                      <ValidationProvider
+                    <ValidationProvider
                       rules="required|name_length|name_chars"
                       debounce="1000"
                       v-slot="{ errors }"
@@ -56,7 +55,7 @@
                       ></v-text-field>
                       <div class="error_box" id="error">{{ errors[0] }}</div>
                     </ValidationProvider>
-                
+
                     <ValidationProvider
                       rules="required|email"
                       debounce="1000"
@@ -210,6 +209,7 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
+  data: () => ({}),
   methods: {
     reset() {
       this.$refs.form.reset();
