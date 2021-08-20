@@ -128,7 +128,7 @@ export default {
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: rgb(51, 51, 51);
   overflow: hidden;
 }
 
