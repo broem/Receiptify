@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import EventBus from "../services/event-bus";
+
 export default {
   name: "header",
   data: () => ({
@@ -53,7 +55,19 @@ export default {
     productActive: false,
     developerActive: false,
     signInActive: false,
+    digitizeActive: false,
   }),
+  mounted() {
+    EventBus.$on("alertDigitizeNav", (active) => {
+      this.digitizeActive = active;
+      if (this.digitizeActive == true) this.landingActive = false;
+      this.premiumActive = false;
+      this.exploreActive = false;
+      this.productActive = false;
+      this.developerActive = false;
+      this.signInActive = false;
+    });
+  },
   methods: {
     pushLandingPath() {
       this.$router.push("/");
@@ -63,6 +77,7 @@ export default {
       this.productActive = false;
       this.developerActive = false;
       this.signInActive = false;
+      this.digitizeActive = false;
     },
     pushPremiumPath() {
       this.$router.push("/premium");
@@ -72,6 +87,7 @@ export default {
       this.productActive = false;
       this.developerActive = false;
       this.signInActive = false;
+      this.digitizeActive = false;
     },
     pushExplorePath() {
       this.$router.push("/explore");
@@ -81,6 +97,7 @@ export default {
       this.productActive = false;
       this.developerActive = false;
       this.signInActive = false;
+      this.digitizeActive = false;
     },
     pushProductPath() {
       this.$router.push("/product");
@@ -90,6 +107,7 @@ export default {
       this.productActive = true;
       this.developerActive = false;
       this.signInActive = false;
+      this.digitizeActive = false;
     },
     pushDeveloperPath() {
       this.$router.push("/developer");
@@ -99,6 +117,7 @@ export default {
       this.productActive = false;
       this.developerActive = true;
       this.signInActive = false;
+      this.digitizeActive = false;
     },
     pushSignInPath() {
       this.$router.push("/signIn");
@@ -108,6 +127,7 @@ export default {
       this.productActive = false;
       this.developerActive = false;
       this.signInActive = true;
+      this.digitizeActive = false;
     },
     myFunction() {
       var x = document.getElementById("myTopnav");
@@ -126,13 +146,11 @@ export default {
   position: relative;
 }
 
-/* Add a black background color to the top navigation */
 .topnav {
-  background-color: rgb(51, 51, 51);
+  background-color: rgb(29, 26, 26);
   overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
 .topnav a {
   float: right;
   display: block;
@@ -143,19 +161,16 @@ export default {
   font-size: 17px;
 }
 
-/* Change the color of links on hover */
 .topnav a:hover {
   background-color: #ddd;
   color: black;
 }
 
-/* Add an active class to highlight the current page */
 .topnav a.active {
-  background-color: #04aa6d;
+  background-color: #2794ca;
   color: white;
 }
 
-/* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
   display: none;
 }
@@ -164,7 +179,7 @@ export default {
   width: 200px;
   z-index: 2;
 }
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {
     display: none;

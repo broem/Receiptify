@@ -2,10 +2,7 @@
   <div id="landing">
     <div class="create_account">
       <v-col cols="auto">
-        <v-dialog 
-          transition="dialog-bottom-transition"
-          max-width="600"
-        >
+        <v-dialog transition="dialog-bottom-transition" max-width="600">
           <template v-slot:activator="{ on, attrs }">
             <v-chip
               style="width:170px; height:40px; text-align:center;"
@@ -135,7 +132,7 @@
     </div>
     <div class="digitize">
       <router-link to="/digitize"
-        ><img src="@/assets/digitize.png" />
+        ><img src="@/assets/digitize.png" @click="digitizeNavigationAlert()" />
       </router-link>
     </div>
 
@@ -203,13 +200,17 @@ extend("password_strength", {
   },
 });
 
+import EventBus from "../services/event-bus";
+
 export default {
   name: "landing",
   components: {
     ValidationProvider,
     ValidationObserver,
   },
-  data: () => ({}),
+  data: () => ({
+    alertNavBar: true,
+  }),
   methods: {
     reset() {
       this.$refs.form.reset();
@@ -222,6 +223,9 @@ export default {
       } else {
         alert("Data isn't valid");
       }
+    },
+    digitizeNavigationAlert() {
+      EventBus.$emit("alertDigitizeNav", this.alertNavBar);
     },
   },
 };
