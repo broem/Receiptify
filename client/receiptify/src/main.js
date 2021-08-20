@@ -9,7 +9,6 @@ import Explore from "./components/nav/Explore";
 import Premium from "./components/nav/Premium";
 import Product from "./components/nav/Product";
 import SignIn from "./components/nav/SignIn";
-import CreateAccount from "./components/CreateAccount";
 
 Vue.use(VueRouter);
 
@@ -23,7 +22,6 @@ const routes = [
   { path: "/premium", component: Premium },
   { path: "/product", component: Product },
   { path: "/signIn", component: SignIn },
-  { path: "/createAccount", component: CreateAccount },
 ];
 
 const router = new VueRouter({
