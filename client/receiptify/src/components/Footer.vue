@@ -8,14 +8,11 @@
 
 <style>
 .foot {
+  color:dodgerblue;
   position: absolute;
   text-align: right;
   bottom: 0%;
   width: 100%;
-  background-image: linear-gradient(
-    to right bottom,
-    rgba(6, 7, 20, 0.808),
-    rgba(3, 14, 8, 0.637)
-  );
+  background-color:rgb(29, 26, 26);
 }
 </style>
